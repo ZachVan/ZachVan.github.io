@@ -1,9 +1,244 @@
 <!DOCTYPE html>
-<html>
-    <head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Zachary Van Iderstine</title>
+  <style>
+    :root {
+      --bg: #0b0d12;
+      --panel: #10141c;
+      --ink: #e8f1ff;
+      --muted: #8ea0bc;
+      --line: #253044;
+      --cyan: #66d9ef;
+      --lime: #a6e22e;
+      --pink: #f92672;
+      --amber: #f4bf75;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+      background:
+        linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px),
+        radial-gradient(circle at 15% 10%, rgba(102,217,239,0.08), transparent 40%),
+        radial-gradient(circle at 85% 85%, rgba(249,38,114,0.08), transparent 35%),
+        var(--bg);
+      background-size: 22px 22px, 22px 22px, auto, auto, auto;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    .frame {
+      max-width: 1100px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 16px;
+      align-items: stretch;
+    }
+    .panel {
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: linear-gradient(180deg, rgba(255,255,255,0.02), transparent), var(--panel);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      min-height: 0; /* allow children to shrink inside flex/grid parents */
+    }
+    .hero {
+      padding: 18px;
+      display: flex;
+      flex-direction: column;
+      flex: 1 1 0;
+      min-height: 0;
+    }
+    .eyebrow {
+      color: var(--cyan);
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      font-size: 11px;
+      margin-bottom: 10px;
+    }
+    h1 {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.05;
+    }
+    .role {
+      color: var(--muted);
+      margin-top: 8px;
+      font-size: 14px;
+    }
+    .quote {
+      margin-top: 14px;
+      border-left: 3px solid var(--pink);
+      background: rgba(249,38,114,0.08);
+      padding: 10px 12px;
+      color: #ffd3e4;
+      font-weight: 700;
+      font-style: italic;
+      margin-left: 0;
+      margin-right: 0;
+    }
+    .quote cite {
+      display: block;
+      margin-top: 6px;
+      color: #ffb8d1;
+      font-style: normal;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .bio {
+      margin-top: 14px;
+      color: #d8e6ff;
+      line-height: 1.65;
+    }
+    .subblocks {
+      margin-top: 16px;
+      display: grid;
+      gap: 12px;
+      grid-auto-rows: 1fr; /* ensure equal-height rows */
+      flex: 1 1 auto;
+      min-height: 0;
+      align-content: stretch;
+    }
+    .subblock {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      padding: 12px;
+      background: rgba(255,255,255,0.015);
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-start;
+    }
+    .stack {
+      display: grid;
+      gap: 16px;
+      flex: 1 1 0;
+      min-height: 0;
+      grid-template-rows: minmax(0, 1.2fr) auto minmax(0, 0.9fr);
+    }
+    .section {
+      padding: 16px;
+      border-top: 1px solid var(--line);
+      display: flex;
+      flex-direction: column;
+    }
+    .section:first-child { border-top: 0; }
+    .title {
+      color: var(--amber);
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      font-size: 12px;
+      margin-bottom: 10px;
+    }
+    ul { margin: 0; padding-left: 18px; line-height: 1.55; }
+    li { margin: 6px 0; }
+    .chips {
+      display: flex;
+      flex-wrap: wrap;
+      max-width: 100%;
+      white-space: normal;
+      overflow-wrap: anywhere;
+      gap: 8px;
+    }
+    .chip {
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      padding: 5px 9px;
+      color: var(--muted);
+      font-size: 12px;
+      background: rgba(255,255,255,0.015);
+    }
+    .contact-row {
+      display: grid;
+      grid-template-columns: 90px 1fr;
+      gap: 10px;
+      margin-bottom: 8px;
+      align-items: start;
+    }
+    .k { color: var(--cyan); }
+    .v, .v a { color: var(--ink); }
+    .v a { text-decoration-color: rgba(102,217,239,0.35); }
+    @media (max-width: 900px) {
+      .frame { grid-template-columns: 1fr; align-items: start; }
+      h1 { font-size: 28px; }
+      .hero { height: auto; }
+      .subblocks {
+        grid-template-rows: none;
+        flex: 0 0 auto;
+      }
+      .stack {
+        height: auto;
+        grid-template-rows: none;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="frame">
+    <section class="panel hero">
+      <div class="eyebrow">Signal / Landing</div>
+      <h1>Zachary Van Iderstine</h1>
+      <div class="role">DevOPS System Administrator</div>
+      <p class="bio">
+        I'm a DevOps System Administrator with a passion for cloud security and automation. With over 5 years of experience in the tech industry, I've honed my skills in designing and managing secure, scalable infrastructure.<br>
+        I focus on cloud security, automation, and software development, and lately I've been diving into how physical security concepts can be applied to cloud environments. Along with how AI is impacting the security landscape and how to best leverage it for defensive purposes.<br>
+        I thrive on solving complex problems and am always eager to learn new technologies and methodologies to enhance my expertise. 
+      </p>
+      <div class="subblocks">
+        <div class="subblock">
+          <div class="title" style="margin-bottom:8px;">Education</div>
+          <div style="color: var(--muted); line-height: 1.55;">
+            Eastern Florida State College (Melbourne, FL) — A.S. Computer Programming<br>
+            FGCU (Fort Myers, FL) — B.S. Computer Software Engineering
+          </div>
+        </div>
+        <div class="subblock">
+          <div class="title" style="margin-bottom:8px;">Certifications</div>
+          <div style="color: var(--muted); line-height: 1.55;">
+            AWS Certified Cloud Practitioner<br>
+            ISC2 Certified in Cybersecurity (CC)<br>
+            Scrum Alliance Advanced Certified ScrumMaster<br>
+            CompTIA A+
+          </div>
+        </div>
+      </div>
+    </section>
 
-    </head>
-    <body>
-        <h1>Hello World</h1>
-    </body>
+    <section class="panel stack">
+      <div class="section">
+        <div class="title">Focus</div>
+        <ul>
+          <li>Cloud security & AWS Organizations governance (IAM, SCPs, RCPs)</li>
+          <li>Kubernetes operations and platform engineering</li>          
+          <li>Python development & practical automation</li>
+          <li>CI/CD workflows (GitHub Actions, GitLab CI, Argo CD)</li>
+        </ul>
+      </div>
+      <div class="section">
+        <div class="title">Tooling</div>
+        <div class="chips">
+          <span class="chip">AWS</span>
+          <span class="chip">Kubernetes (EKS, GKE, OKE, RKE2, OpenShift)</span>
+          <span class="chip">Networking (VPC design, routing, segmentation)</span>
+          <span class="chip">Node.js, Bash scripting, C++</span>
+          <span class="chip">Terraform</span>
+          <span class="chip">CI/CD (GitHub Actions, GitLab CI, Argo CD)</span>
+          <span class="chip">Linux systems administration</span>
+          <span class="chip">Observability (Prometheus, Grafana, Better Stack, OneUptime)</span>
+        </div>
+      </div>
+      <div class="section">
+        <div class="title">Meta</div>
+        <div class="contact-row"><div class="k">email</div><div class="v">zach@zachvan.com</div></div>
+        <div class="contact-row"><div class="k">linkedin</div><div class="v"><a href="https://www.linkedin.com/in/zachary-van-iderstine/" target="_blank" rel="noreferrer">linkedin.com/in/zachary-van-iderstine</a></div></div>
+      </div>
+    </section>
+  </div>
+</body>
 </html>
